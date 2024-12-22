@@ -23,7 +23,7 @@ jobs:
 
     - name: Build Docker image
       run: |
-        docker build . -t your-dockerhub-username/image-Search-API:latest
+        docker build . -t your-dockerhub-username/image-search-api:latest
 
     - uses: actions/checkout@v3
       name: Check out code
@@ -31,7 +31,7 @@ jobs:
     - uses: mr-smithers-excellent/docker-build-push@v6
       name: Build & push Docker image
       with:
-        image: ${{ secrets.DOCKER_USERNAME }}/image-Search-API
+        image: ${{ secrets.DOCKER_USERNAME }}/image-search-api
         tags: v1, latest
         registry: docker.io
         dockerfile: Dockerfile
@@ -40,4 +40,4 @@ jobs:
     
 
     - name: Push Docker image
-      run: docker push your-dockerhub-username/image-Search-API:latest
+      run: docker push your-dockerhub-username/image-search-api:latest
