@@ -52,14 +52,6 @@ jobs:
       id-token: write #This is required for requesting the JWT
 
     steps:
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v4
-        with:
-          name: node-app
-
-      - name: Unzip artifact for deployment
-        run: unzip release.zip
-      
       - name: Login to Azure
         uses: azure/login@v2
         with:
@@ -73,5 +65,9 @@ jobs:
         with:
           app-name: 'imageSearchAPI'
           slot-name: 'Production'
+          docker-registry-url: 'https://registry.hub.docker.com'
+          docker-registry-username: ${{ secrets.DOCKER_USERNAME }}
+          docker-registry-password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
+          docker-image-name: ${{ secrets.DOCKER_USERNAME }}/image-search-api:latest
           package: .
 
